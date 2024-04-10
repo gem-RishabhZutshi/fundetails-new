@@ -50,7 +50,7 @@ jobs:
         run: |
             pwd
             ls -la
-            cd PIMCO-POC
-            node --experimental-modules bin/pimco-poc.ts
-            cdk deploy --app="node bin/pimco-poc.ts" --require-approval=never
+            #cd PIMCO-POC
+            node --experimental-modules PIMCO-POC/bin/pimco-poc.ts
+            cdk deploy --app="node PIMCO-POC/bin/pimco-poc.ts" --require-approval=never
             
