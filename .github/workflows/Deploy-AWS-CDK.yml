@@ -50,6 +50,6 @@ jobs:
         run: |
             pwd
             ls -la
-            #cd PIMCO-POC
-            cdk deploy --app="PIMCO-POC/bin/pimco-poc.ts" --require-approval=never
+            cd PIMCO-POC
+            cdk deploy --app="bin/pimco-poc.ts" --require-approval=never
             
