@@ -4,6 +4,7 @@ import * as cloudfront from 'aws-cdk-lib/aws-cloudfront';
 import * as path from 'path';
 import * as fs from 'fs';
 import * as s3deploy from 'aws-cdk-lib/aws-s3-deployment';
+import * as iam from 'aws-cdk-lib/aws-iam'
 import { Construct } from 'constructs';
 
 
@@ -26,7 +27,35 @@ export class StaticWebsiteStack extends cdk.Stack {
       removalPolicy: cdk.RemovalPolicy.DESTROY,
       websiteIndexDocument: 'index.html',
       websiteErrorDocument: 'error.html',
+      publicReadAccess: true,
     });
+
+
+    const bucketPolicy = new s3.BucketPolicy(this, 'BucketPolicy', {
+      bucket: websiteBucket,
+    });
+    
+   bucketPolicy.document.addStatements(new iam.PolicyStatement({
+      actions: ['s3:GetObject'],
+      resources: [websiteBucket.arnForObjects('*')],
+      principals: [new iam.AnyPrincipal()],
+      conditions: {
+        StringEquals: {
+          's3:x-amz-acl': 'public-read',
+        },
+      },
+    }));
+    
+    websiteBucket.addToResourcePolicy(new iam.PolicyStatement({
+      actions: ['s3:PutBucketPublicAccessBlock'],
+      resources: [websiteBucket.bucketArn],
+      principals: [new iam.ServicePrincipal('s3.amazonaws.com')],
+      conditions: {
+        Bool: {
+          's3:x-amz-acl': 'false',
+        },
+      },
+    }));
 
     // Create a CloudFront distribution for the environment
     const cloudFrontDistribution = new cloudfront.CloudFrontWebDistribution(this, 'CloudFrontDistribution', {
