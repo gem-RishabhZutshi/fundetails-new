@@ -1,7 +1,6 @@
 {
   "name": "pimco-poc",
   "version": "0.1.0",
-  "type": "module",
   "bin": {
     "pimco-poc": "bin/pimco-poc.js"
   },
