@@ -39,7 +39,7 @@ export class StaticWebsiteStack extends cdk.Stack {
         },
       ],
       viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
-      distributionName: 'fundetails'
+    
     });
 
     // Update the distributionId property in the environment object
