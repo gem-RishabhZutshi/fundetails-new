@@ -31,16 +31,30 @@ export class StaticWebsiteStack extends cdk.Stack {
     // Create a CloudFront distribution for the environment
     const cloudFrontDistribution = new cloudfront.CloudFrontWebDistribution(this, 'CloudFrontDistribution', {
       originConfigs: [
-        {
-          s3OriginSource: {
-            s3BucketSource: websiteBucket
-          },
-          behaviors: [{ isDefaultBehavior: true }],
-        },
-      ],
-      viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
-    
-    });
+    {
+      s3OriginSource: {
+        s3BucketSource: websiteBucket,
+        originPath: '/dev', // Set the origin path for the dev folder
+      },
+      behaviors: [{ pathPattern: '/dev/*' }], // Match requests to /dev/*
+    },
+    {
+      s3OriginSource: {
+        s3BucketSource: websiteBucket,
+        originPath: '/uat', // Set the origin path for the uat folder
+      },
+      behaviors: [{ pathPattern: '/uat/*' }], // Match requests to /uat/*
+    },
+    {
+      s3OriginSource: {
+        s3BucketSource: websiteBucket,
+        originPath: '/prod', // Set the origin path for the prod folder
+      },
+      behaviors: [{ pathPattern: '/prod/*' }], // Match requests to /prod/*
+    },
+  ],
+  viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
+});
 
     // Update the distributionId property in the environment object
     environment.distributionId = cloudFrontDistribution.distributionId;
