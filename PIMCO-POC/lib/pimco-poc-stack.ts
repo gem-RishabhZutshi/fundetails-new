@@ -31,6 +31,14 @@ export class StaticWebsiteStack extends cdk.Stack {
     // Create a CloudFront distribution for the environment
     const cloudFrontDistribution = new cloudfront.CloudFrontWebDistribution(this, 'CloudFrontDistribution', {
       originConfigs: [
+
+    {
+          s3OriginSource: {
+            s3BucketSource: websiteBucket
+          },
+          behaviors: [{ isDefaultBehavior: true }],
+    },
+
     {
       s3OriginSource: {
         s3BucketSource: websiteBucket,
