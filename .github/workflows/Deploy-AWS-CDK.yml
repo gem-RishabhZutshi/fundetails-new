@@ -51,5 +51,6 @@ jobs:
             pwd
             ls -la
             cd PIMCO-POC
+            chmod +x bin/pimco-poc.ts
             cdk deploy --app="bin/pimco-poc.ts" --require-approval=never
             
