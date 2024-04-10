@@ -24,11 +24,6 @@
       "./node_modules/@types"
     ]
   },
-  "ts-node": {
-    "compilerOptions": {
-      "module": "commonjs"
-    }
-  },
   "exclude": [
     "node_modules",
     "cdk.out"
