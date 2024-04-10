@@ -37,7 +37,7 @@ jobs:
 
       - name: Install dependencies
         run: npm install
-        working-directory: ${PWD}/PIMCO-POC
+        working-directory: PIMCO-POC
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@master
