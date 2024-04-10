@@ -27,7 +27,7 @@ jobs:
       #     npm install -g aws-cdk
       - name: Install AWS CLI
         run: |
-          sudo apt-get update
+          sudo apt-get update -y
           sudo apt-get install -y python3-pip
           pip3 install --upgrade pip
           pip3 install awscli
