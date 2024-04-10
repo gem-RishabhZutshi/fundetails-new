@@ -46,7 +46,7 @@ export class StaticWebsiteStack extends cdk.Stack {
 
     // Function to create or update static content
     const createOrUpdateStaticContent = (folderName: string) => {
-      const contentFolderPath = path.join(__dirname, folderName);
+      const contentFolderPath = path.join(__dirname, '../../', folderName);
       const indexHtmlPath = path.join(contentFolderPath, 'index.html');
       
       if (!fs.existsSync(contentFolderPath)) {
@@ -56,8 +56,8 @@ export class StaticWebsiteStack extends cdk.Stack {
       
       if (!fs.existsSync(indexHtmlPath)) {
         console.log(`index.html not found in ${folderName}. Creating now...`);
-        const generatedContent = `<!DOCTYPE html><html><head><title>${folderName} Page</title></head><body><h1>Welcome to ${folderName}!</h1></body></html>`;
-        fs.writeFileSync(indexHtmlPath, generatedContent, 'utf-8');
+        // const generatedContent = `<!DOCTYPE html><html><head><title>${folderName} Page</title></head><body><h1>Welcome to ${folderName}!</h1></body></html>`;
+        fs.writeFileSync(indexHtmlPath, 'utf-8');
       }
       
       console.log(`Deploying static content from ${folderName} to S3 and CloudFront...`);
