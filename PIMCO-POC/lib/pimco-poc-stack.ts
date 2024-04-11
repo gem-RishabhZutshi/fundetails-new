@@ -90,6 +90,8 @@ export class StaticWebsiteStack extends cdk.Stack {
         sources: [s3deploy.Source.asset(contentFolderPath)],
         destinationBucket: websiteBucket,
         destinationKeyPrefix: folderName,
+        distribution: cloudFrontDistribution,
+        distributionPaths: ['/dev/*', '/uat/*', '/prod/*'], // Paths to invalidate in the CloudFront distribution
       });
     };
 
