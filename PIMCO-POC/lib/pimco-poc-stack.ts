@@ -91,7 +91,7 @@ export class StaticWebsiteStack extends cdk.Stack {
         destinationBucket: websiteBucket,
         destinationKeyPrefix: folderName,
         distribution: cloudFrontDistribution,
-        distributionPaths: ['/dev/*', '/uat/*', '/prod/*'], // Paths to invalidate in the CloudFront distribution
+        distributionPaths: ['/dev/*', '/uat/*', '/prod/*', '/*', '/index.html'], // Paths to invalidate in the CloudFront distribution
       });
     };
 
