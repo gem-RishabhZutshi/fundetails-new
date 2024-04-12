@@ -21,6 +21,9 @@ jobs:
         with:
           github-token: ${{ secrets.MAIN_TOKEN }}
           script: |
+            const { Octokit } = require("@octokit/core");
+            const octokit = new Octokit({ auth: process.env.MAIN_TOKEN });  
+            
             const response = await octokit.request('POST /repos/{owner}/{repo}/actions/workflows/{workflow_id}/dispatches', {
               owner: context.repo.owner,
               repo: context.repo.repo,
