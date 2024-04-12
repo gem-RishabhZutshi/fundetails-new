@@ -1,0 +1,27 @@
+name: Set Variables and Trigger Main Workflow
+
+on:
+  workflow_dispatch:
+    inputs:
+      domainName: # Input variable for domain name
+        description: 'Domain enviornment Name'
+        required: true
+      bucketName: # Input variable for bucket name
+        description: 'Bucket Name'
+        required: true
+      folderName: # Input variable for folder name
+        description: 'Folder Name'
+        required: true
+
+jobs:
+  set-variables-and-trigger:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up variables
+        run: |
+          echo "DOMAIN_NAME=${{ github.event.inputs.domainName }}" >> $GITHUB_ENV
+          echo "BUCKET_NAME=${{ github.event.inputs.bucketName }}" >> $GITHUB_ENV
+          echo "FOLDER_NAME=${{ github.event.inputs.folderName }}" >> $GITHUB_ENV
+          echo "DOMAIN_NAME=${DOMAIN_NAME}"
+          echo "BUCKET_NAME=${BUCKET_NAME}"
+          echo "FOLDER_NAME=${FOLDER_NAME}"
