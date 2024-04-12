@@ -16,17 +16,17 @@ jobs:
           echo "BUCKET_NAME=$BUCKET_NAME"
           echo "FOLDER_NAME=$FOLDER_NAME"
           
-      - name: Trigger Main Workflow
-        uses: actions/github-script@v5
-        with:
-          github-token: ${{ secrets.MAIN_TOKEN }}
-          script: |
-            const { Octokit } = require("@octokit/core");
-            const octokit = new Octokit({ auth: process.env.MAIN_TOKEN });  
+      # - name: Trigger Main Workflow
+      #   uses: actions/github-script@v5
+      #   with:
+      #     github-token: ${{ secrets.MAIN_TOKEN }}
+      #     script: |
+      #       const { Octokit } = require("@octokit/core");
+      #       const octokit = new Octokit({ auth: process.env.MAIN_TOKEN });  
             
-            const response = await octokit.request('POST /repos/{owner}/{repo}/actions/workflows/{workflow_id}/dispatches', {
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              workflow_id: 'Deploy-AWS-CDK.yml', // Replace with your main workflow ID
-            });
-            console.log(response);
+      #       const response = await octokit.request('POST /repos/{owner}/{repo}/actions/workflows/{workflow_id}/dispatches', {
+      #         owner: context.repo.owner,
+      #         repo: context.repo.repo,
+      #         workflow_id: 'Deploy-AWS-CDK.yml', // Replace with your main workflow ID
+      #       });
+      #       console.log(response);
