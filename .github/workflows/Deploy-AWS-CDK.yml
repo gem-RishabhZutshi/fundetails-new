@@ -1,7 +1,10 @@
 name: AWS Service CI/CD
 
 on:
-  workflow_dispatch:
+  workflow_run:
+    workflows: ["variables-set"] # Specify the name of the workflow that triggers this one
+    types:
+      - completed
 
 jobs:
   build:
@@ -45,7 +48,7 @@ jobs:
             ls -la
             cd PIMCO-POC
             chmod +x bin/pimco-poc.ts
-            npx ts-node bin/pimco-poc.ts
+            npx ts-node bin/pimco-poc.ts --domain-name ${{ env.DOMAIN_NAME }} --bucket-name ${{ env.BUCKET_NAME }} --folder-name ${{ env.FOLDER_NAME }}
             cdk deploy --require-approval=never
 
             
