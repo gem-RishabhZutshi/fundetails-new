@@ -12,9 +12,9 @@ jobs:
           echo "DOMAIN_NAME=dev" >> $GITHUB_ENV
           echo "BUCKET_NAME=newest-hre" >> $GITHUB_ENV
           echo "FOLDER_NAME=dev" >> $GITHUB_ENV
-          echo "DOMAIN_NAME=${env.DOMAIN_NAME}"
-          echo "BUCKET_NAME=${env.BUCKET_NAME}"
-          echo "FOLDER_NAME=${env.FOLDER_NAME}"
+          echo "DOMAIN_NAME=$DOMAIN_NAME"
+          echo "BUCKET_NAME=$BUCKET_NAME"
+          echo "FOLDER_NAME=$FOLDER_NAME"
           
       - name: Trigger Main Workflow
         uses: actions/github-script@v5
