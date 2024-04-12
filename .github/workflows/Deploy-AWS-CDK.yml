@@ -1,10 +1,7 @@
 name: AWS Service CI/CD
 
 on:
-  workflow_run:
-    workflows: ["variables-set"] # Specify the name of the workflow that triggers this one
-    types:
-      - completed
+  workflow_dispatch:
 
 jobs:
   build:
