@@ -1,7 +1,10 @@
 name: AWS Service CI/CD
 
 on:
-  workflow_dispatch:
+   workflow_run:
+    workflows: [variables-set]
+    types:
+      - completed
 
 jobs:
   build:
